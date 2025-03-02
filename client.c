@@ -65,9 +65,12 @@ int	is_valid_pid(char *str)
 
 int	main(int ac, char **av)
 {
+	int	pid;
+
 	if (ac == 3)
 	{
-		printf("the pid is %d\n", is_valid_pid(av[1]));
+		pid = is_valid_pid(av[1]);
+		printf("the pid is %d\n", pid);
 	}
 	else 
 	{

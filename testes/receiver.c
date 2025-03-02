@@ -11,7 +11,7 @@ void	handler(int n)
 
 int	main()
 {
-    signal(SIGTERM, handler); // Catch SIGTERM
+    // signal(SIGTERM, handler); // Catch SIGTERM
 	signal(SIGKILL, handler);
 
 	printf("the pid is %d \n", getpid());
