@@ -1,9 +1,21 @@
 #include <signal.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+void	handler(int n)
+{
+	write(1, "STOP\n", 5);
+}
 
 int main()
 {
-  int *n = malloc(sizeof(int));
-  *n = 10;
-  signal(10, signal(20, (__sighandler_t)30)); // ovalley's code 
+		signal(SIGINT, handler);
+		while (1)
+		{
+			printf("hey im here ! %d",getpid());
+			// usleep(7000);
+			sleep(1);
+			
+		}
 }
