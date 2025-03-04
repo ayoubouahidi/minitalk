@@ -63,14 +63,40 @@ int	is_valid_pid(char *str)
 	return(ft_atoi(str));
 }
 
+void	send_char_bin(int pid, unsigned char c)
+{
+	int	i;
+	unsigned char tmp;
+
+	i = 0;
+	while (i != 8)
+	{
+		tmp = c & i;
+		if (tmp % 2 == 0)
+			kill(pid, SIGUSR2);
+		else 
+			kill(pid, SIGUSR1);
+		c = c >> 1;
+		i++;
+		usleep(100);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	int	pid;
+	int	i;
 
+	i = 0;
 	if (ac == 3)
 	{
 		pid = is_valid_pid(av[1]);
 		printf("the pid is %d\n", pid);
+		while (av[2])
+		{
+			send_char_bin(pid, av[2][i]);
+			i++;
+		}
 	}
 	else 
 	{
