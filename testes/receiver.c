@@ -11,11 +11,20 @@ void	handler(int n)
 
 int	main()
 {
+	int tmp;
     // signal(SIGTERM, handler); // Catch SIGTERM
-	signal(SIGKILL, handler);
+	if(signal(SIGUSR1, handler))
+	{
+		tmp = 1;
+	}
+	else
+	{
+		tmp = 0;
+	}
+	
 
 	printf("the pid is %d \n", getpid());
-
+	// printf("the sig is %d\n", tmp);
 	while(1) {
         pause();
     }

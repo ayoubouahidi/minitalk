@@ -7,6 +7,8 @@ int main()
 	int pid = 38570;
 	char num = 'a';
 
-	kill(pid, num);
+	// kill(pid, num);
+	kill(pid, SIGUSR1);
+	
 	
 }

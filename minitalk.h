@@ -12,12 +12,14 @@
 
 #ifndef MINITALK_H
 # define MINITALK_H
-
+# define _POSIX_C_SOURCE 200809L
+# define _GNU_SOURCE
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <ctype.h>
+
 
 long	ft_atoi(const char *str);
 long	ft_atoi_err(const char *str, int *err);
