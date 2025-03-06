@@ -16,7 +16,7 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 		charact |= (1 << bit);
 	bit++;
 	if (bit == 8)
-	{
+	{ 	
 		write(1, &charact, 1);
 		bit = 0;
 		charact = 0;
@@ -32,16 +32,6 @@ int main()
 	printf("the pid is : %d\n", getpid());
 	// signal(SIGUSR1,handle_signal);
 	// signal(SIGUSR2,handle_signal);
-	// if (sigaction(SIGUSR1, &sa, NULL) == -1)
-    // {
-    //     perror("sigaction");
-    //     return 1;
-    // }
-    // if (sigaction(SIGUSR2, &sa, NULL) == -1)
-    // {
-    //     perror("sigaction");
-    //     return 1;
-    // }
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
