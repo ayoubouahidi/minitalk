@@ -72,13 +72,13 @@ void	send_char_bin(int pid, unsigned char c)
 	while (i < 8)
 	{
 		tmp = c & 1;
-		if (tmp % 2 == 0)
+		if (tmp == 0)
 			kill(pid, SIGUSR2);
 		else 
 			kill(pid, SIGUSR1);
 		c = c >> 1;
+		usleep(700);
 		i++;
-		usleep(100);
 	}
 }
 
@@ -93,33 +93,16 @@ int	main(int ac, char **av)
 	{
 		pid = is_valid_pid(av[1]);
 		// printf("the pid is %d\n", pid);
-		while (av[2][i] != '\0')
+		while (i < lenght(av[2]))
 		{
 			send_char_bin(pid, av[2][i]);
 			i++;
 		}
+		send_char_bin(pid, '\0');
 	}
 	else 
 	{
 		write(2, "Error\n", 7);
 	}
-	// if (ac == 3)
-  //   {
-  //       int pid = is_valid_pid(av[1]); // Validate and get PID
-  //       printf("The PID is %d\n", pid);
-
-  //       const char *message = av[2]; // Get the message to send
-  //       int i = 0;
-  //       while (message[i] != '\0') // Iterate over each character
-  //       {
-  //           send_char_bin(pid, message[i]); // Send the character
-  //           i++;
-  //       }
-  //   }
-  //   else
-  //   {
-  //       write(2, "Error: Invalid arguments\n", 25);
-  //   }
-
     return 0;
 }
