@@ -1,14 +1,14 @@
 #include "minitalk.h"
 #include <signal.h>
-
+#include "./ft_printf/ft_printf.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 
 void	handle_signal(int sig, siginfo_t *info, void *context)
 {
-	(void)info;    // Unused parameter
-    (void)context; // Unused parameter
+	(void)info;    
+  (void)context; 
 	static char charact;
 	static int bit;
 
@@ -29,7 +29,7 @@ int main()
 
 	sa.sa_sigaction = handle_signal;
 	sa.sa_flags = SA_SIGINFO;
-	printf("the pid is : %d\n", getpid());
+	ft_printf("the pid is : %d\n", getpid());
 	// signal(SIGUSR1,handle_signal);
 	// signal(SIGUSR2,handle_signal);
 	sigaction(SIGUSR1, &sa, NULL);

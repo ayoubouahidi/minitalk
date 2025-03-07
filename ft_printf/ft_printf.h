@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayouahid <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/02 02:23:16 by ayouahid          #+#    #+#             */
-/*   Updated: 2025/03/02 02:23:19 by ayouahid         ###   ########.fr       */
+/*   Created: 2024/11/29 13:53:32 by ayouahid          #+#    #+#             */
+/*   Updated: 2024/11/29 13:53:34 by ayouahid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# define _POSIX_C_SOURCE 200809L
-# define _GNU_SOURCE
-# include <stdio.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
 # include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <ctype.h>
-# include "./ft_printf/ft_printf.h"
+# include <stdarg.h>
 
-long	ft_atoi(const char *str);
-long	ft_atoi_err(const char *str, int *err);
-int	ft_isdigit(int a);
-char	*isvalid(char *av);
+int	ft_putchar(int c);
+int	ft_printf(const char *format, ...);
 
-#endif
+#endif // PRINTF_H

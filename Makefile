@@ -1,44 +1,40 @@
-# SRCC		= client.c help_fun_1.c
-# SRCS		= server.c
-# CC		= cc
+SRCC		= client.c help_fun_1.c
+SRCS		= server.c
+CC		= cc
 
-# CFLAGS	= -Wall -Wextra -Werror -g
-# NAME1	= client
-# NAME2	= server
-# L_CRT	= ar rcs
-# OBJSC	= $(SRCC:.c=.o)
+CFLAGS	= -Wall -Wextra -Werror
+NAME1	= client
+NAME2	= server
+L_CRT	= ar rcs
+OBJSC	= $(SRCC:.c=.o)
+OBJSS = $(SRCS:.c=.o)
+MK		= make
 
-# MK		= make
+FT_PRINTF_DIR	= ./ft_printf
+FT_PRINTF_LIB	= $(FT_PRINTF_DIR)/libftprintf.a
 
-# # Paths
-# FT_PRINTF_DIR	= ./ft_printf
-# FT_PRINTF_LIB	= $(FT_PRINTF_DIR)/libftprintf.a
+all: $(NAME1) $(NAME2)
 
-# LIBFT_DIR = ./libft
-# LIBFT_LIB = $(LIBFT_DIR)/libft.a
+$(NAME1) : $(OBJSC) $(FT_PRINTF_LIB)
+	$(CC) $(CFLAGS) $(OBJSC) $(FT_PRINTF_LIB) -o $(NAME1) 
 
-# # Rules
-# all: $(NAME1) $(NAME2)
+$(NAME2) : $(OBJSS) $(FT_PRINTF_LIB)
+	$(CC) $(CFLAGS) $(OBJSS) $(FT_PRINTF_LIB) -o $(NAME2) 
 
-# $(NAME): $(OBJS) $(FT_PRINTF_LIB) $(LIBFT_LIB)
-# 	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF_LIB) $(LIBFT_LIB) -o $(NAME)
+$(FT_PRINTF_LIB):
+	$(MK) -C $(FT_PRINTF_DIR)
 
-# $(FT_PRINTF_LIB):
-# 	$(MK) -C $(FT_PRINTF_DIR)
+# $(LIBFT_LIB):
+# 	$(MK) -C $(LIBFT_DIR)
 
-# # $(LIBFT_LIB):
-# # 	$(MK) -C $(LIBFT_DIR)
+clean:
+	rm -f $(OBJSS) $(OBJSC)
+	$(MK) -C $(FT_PRINTF_DIR) clean
 
-# clean:
-# 	rm -f $(OBJS)
-# 	$(MK) -C $(FT_PRINTF_DIR) clean
-# 	$(MK) -C $(LIBFT_DIR) clean
+fclean: clean
+	rm -f $(NAME1) $(NAME2)
+	$(MK) -C $(FT_PRINTF_DIR) fclean
 
-# fclean: clean
-# 	rm -f $(NAME)
-# 	$(MK) -C $(FT_PRINTF_DIR) fclean
-# 	$(MK) -C $(LIBFT_DIR) fclean
+re: fclean all
 
-# re: fclean all
-
-# .PHONY: all clean fclean re
+.PHONY: all clean fclean re

@@ -92,7 +92,6 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		pid = is_valid_pid(av[1]);
-		// printf("the pid is %d\n", pid);
 		while (i < lenght(av[2]))
 		{
 			send_char_bin(pid, av[2][i]);
