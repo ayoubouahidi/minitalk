@@ -1,4 +1,4 @@
-SRCC		= client.c help_fun_1.c
+SRCC		= client.c help_fun_1.c help_fun_2.c 
 SRCS		= server.c
 CC		= cc
 
@@ -23,9 +23,6 @@ $(NAME2) : $(OBJSS) $(FT_PRINTF_LIB)
 
 $(FT_PRINTF_LIB):
 	$(MK) -C $(FT_PRINTF_DIR)
-
-# $(LIBFT_LIB):
-# 	$(MK) -C $(LIBFT_DIR)
 
 clean:
 	rm -f $(OBJSS) $(OBJSC)

@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include "minitalk.h"
 
-
 int	lenght(char *av)
 {
 	int	i;
@@ -51,37 +50,41 @@ char	*isvalid(char *av)
 	return ("is valid ");
 }
 
-
 int	is_valid_pid(char *str)
 {
-	
-	if (!isvalid(str))
+	if (!isvalid(str) || ft_atoi(str) == -1 || ft_atoi(str) == 1
+		|| ft_atoi(str) == 0)
 	{
-		write(2, "Error", 5);
+		write(2, "Invalid PID\n", 13);
 		exit(1);
 	}
-	return(ft_atoi(str));
+	return (ft_atoi(str));
 }
 
 void	send_char_bin(int pid, unsigned char c)
 {
-	int	i;
-	unsigned char tmp;
+	int				i;
+	unsigned char	tmp;
 
 	i = 0;
 	while (i < 8)
 	{
 		tmp = c & 1;
 		if (tmp == 0)
-			kill(pid, SIGUSR2);
-		else 
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				print_err();
+		}
+		else
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				print_err();
+		}
 		c = c >> 1;
 		usleep(700);
 		i++;
 	}
 }
-
 
 int	main(int ac, char **av)
 {
@@ -99,9 +102,9 @@ int	main(int ac, char **av)
 		}
 		send_char_bin(pid, '\0');
 	}
-	else 
+	else
 	{
 		write(2, "Error\n", 7);
 	}
-    return 0;
+	return (0);
 }
